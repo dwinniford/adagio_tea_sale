@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/adagio_tea_sale'
+require_relative '../lib/adagio_tea_sale/version'
+require_relative '../lib/adagio_tea_sale/cli'
 
 AdagioTeaSale::CLI.new.call 

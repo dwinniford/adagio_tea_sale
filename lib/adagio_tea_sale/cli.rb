@@ -1,3 +1,7 @@
+#require_relative "../lib/tea.rb"
+#require_relative "../lib/user.rb"
+#require_relative "../lib/scraper.rb"
+#require "nokogiri"
 
 class AdagioTeaSale::CLI 
   

@@ -1,4 +1,4 @@
-require "adagio_tea_sale/version"
+require_relative "./adagio_tea_sale/version"
 
 module AdagioTeaSale
   class Error < StandardError; end
