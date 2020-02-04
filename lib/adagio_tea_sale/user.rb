@@ -1,0 +1,1 @@
+#has shopping cart with tea and total price
