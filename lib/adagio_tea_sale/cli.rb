@@ -5,6 +5,10 @@
 
 class AdagioTeaSale::CLI 
   
+  def initialize
+    #call scraper to create instances of Tea
+  end 
+  
   def call
     puts "Welcome to Adagio Tea."
     list_sales
@@ -19,6 +23,7 @@ class AdagioTeaSale::CLI
   end 
   
   def menu 
+    loop do 
     puts "Choose an option:"
     puts "To select a tea for more information, enter 'select'."
     puts "To sort tea by price, enter 'sort price'."
@@ -26,7 +31,23 @@ class AdagioTeaSale::CLI
     puts "To sort tea by price per cup, enter 'sort cup'."
     puts "To add a tea to shopping cart, enter 'add cart'."
     puts "To exit, enter 'exit'."
-    #input = gets.strip 
+    input = gets.strip 
+    case input
+      when 'select'
+        select_tea
+      when 'sort price'
+        sort_by_price
+      when 'sort percent'
+        sort_by_percent
+      when 'sort cup'
+        sort_by_cup
+      when 'add cart'
+        add_to_cart
+      when 'exit'
+        exit 
+      end 
+    end 
+    
   
   end 
     
