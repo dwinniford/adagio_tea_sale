@@ -30,7 +30,7 @@ class AdagioTeaSale::CLI
   
   def menu 
     loop do 
-    puts "Choose an option:"
+    puts "Main Menu - Choose an option:"
     puts "To select a tea for more information, enter 'select'."
     puts "To sort tea by price, enter 'sort price'."
     puts "To sort tea by percent off, enter 'sort percent'."
@@ -60,27 +60,28 @@ class AdagioTeaSale::CLI
     puts "Please enter the name of a tea:"
     # input = gets.strip
     # t = Tea.find_by_name(input)
-    # puts "Name: #{t.name}" 
-    # puts "Rating: #{t.rating}" 
-    # puts "Quantity: #{t.quantity}" 
-    # puts "Price: #{t.price}" 
-    # puts "Price per cup: #{t.price_per_cup}"
-    # puts "Percent off: #{to.percent off}" 
-    # puts "More info: #{t.info}"
-    # puts "Caffeine: #{t.caffeine}"
-    # puts "Brewing instructions: #{t.brewing}"
-    puts "To add this tea to your shopping cart, enter 'add_cart'."
+    # print_tea_info(t)
+    t = "black tea"
+    puts "To add this tea to your shopping cart, enter 'add cart'."
     puts "To see main menu, enter 'menu'."
     input = gets.strip
-    if input == "add_cart"
-     # current_user.add_to_cart(t)
-      puts "Added_to_cart"
+    if input == "add cart"
+      add_cart(t)
     elsif input == "menu"
       menu 
     end 
   end 
   
-  def print_tea_info
+  def print_tea_info(t)
+    puts "Name: #{t.name}" 
+    puts "Rating: #{t.rating}" 
+    puts "Quantity: #{t.quantity}" 
+    puts "Price: #{t.price}" 
+    puts "Price per cup: #{t.price_per_cup}"
+    puts "Percent off: #{to.percent off}" 
+    puts "More info: #{t.info}"
+    puts "Caffeine: #{t.caffeine}"
+    puts "Brewing instructions: #{t.brewing}"
   end 
   
   def sort_by_price
@@ -99,6 +100,7 @@ class AdagioTeaSale::CLI
   end 
   
   def view_cart
+    # create loop
     # if current_user.cart.length == 0 
     #   puts "Your cart is empty."
     # else 
@@ -111,15 +113,33 @@ class AdagioTeaSale::CLI
     puts "To view the main menu, enter 'menu'."
     input = gets.strip
     case input 
-      # when "remove item"
-      #   remove_item
-      # when "remove_all"
-      #   remove_all
+      when "remove item"
+        remove_item
+      when "remove all"
+        remove_all
       when "select"
         select_tea
       when "menu"
         menu 
     end 
+  end 
+  
+  def add_cart(t)
+    #current_user.add_cart(t)
+   # puts "#{t.name} was added to your cart."
+     puts "A #{t} was added to your cart."
+  end 
+  
+  def remove_item
+    puts "Please enter the name of a tea."
+    input = gets.strip
+    # current_user.remove_item(input)
+    puts "'#{input}' was succesfully removed from your cart."
+  end 
+  
+  def remove_all
+    #current_user.remove_all
+    puts "All items removed from your cart."
   end 
   
     
