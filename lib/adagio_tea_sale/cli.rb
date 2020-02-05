@@ -7,7 +7,7 @@ class AdagioTeaSale::CLI
   attr_accessor :current_user
   
   def initialize
-    #Tea.create_from_sale_page
+    AdagioTeaSale::Tea.create_from_sale_page
     @current_user = AdagioTeaSale::User.new 
   end 
   
@@ -64,7 +64,8 @@ class AdagioTeaSale::CLI
     # input = gets.strip
     # t = Tea.find_by_name(input)
     # print_tea_info(t)
-    t = "black tea"
+    # t = "jasmine tea"
+    # puts t 
     puts "To add this tea to your shopping cart, enter 'add cart'."
     puts "To see main menu, enter 'menu'."
     input = gets.strip
@@ -110,6 +111,7 @@ class AdagioTeaSale::CLI
     #   print_tea(current_user.cart)
     # end 
     puts "Items in your cart..."
+    puts current_user.cart 
     puts "To remove an item, enter 'remove item'."
     puts "To remove all items, enter 'remove all'."
     puts "To select a tea for more information, enter 'select'."
@@ -128,20 +130,20 @@ class AdagioTeaSale::CLI
   end 
   
   def add_cart(t)
-    #current_user.add_cart(t)
-   # puts "#{t.name} was added to your cart."
+     current_user.add_cart(t)
+    # puts "#{t.name} was added to your cart."
      puts "A #{t} was added to your cart."
   end 
   
   def remove_item
     puts "Please enter the name of a tea."
     input = gets.strip
-    # current_user.remove_item(input)
+    current_user.remove_item(input)
     puts "'#{input}' was succesfully removed from your cart."
   end 
   
   def remove_all
-    #current_user.remove_all
+    current_user.remove_all
     puts "All items removed from your cart."
   end 
   
