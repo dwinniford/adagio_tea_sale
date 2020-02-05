@@ -1,14 +1,16 @@
 #require_relative "../lib/tea.rb"
-#require_relative "../lib/user.rb"
-#require_relative "../lib/scraper.rb"
+require_relative "./user.rb"
+#require_relative "./scraper.rb"
 #require "nokogiri"
 
 class AdagioTeaSale::CLI 
+  attr_accessor :current_user
   
   def initialize
-    #call scraper to create instances of Tea
+    #Tea.create_from_sale_page
+    @current_user = AdagioTeaSale::User.new 
   end 
-  
+  binding.pry 
   def call
     puts "Welcome to Adagio Tea."
     list_sales
