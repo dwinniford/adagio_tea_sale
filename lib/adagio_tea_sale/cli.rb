@@ -27,7 +27,7 @@ class AdagioTeaSale::CLI
   
   def print_tea(tea_array)
     tea_array.each do |t|
-      puts "Name: #{t.name}, Price: #{t.price}"
+      puts "Name: #{t.name}, Price: #{t.sale_price}"
     end 
   end 
   
@@ -79,8 +79,9 @@ class AdagioTeaSale::CLI
   def print_tea_info(t)
     puts "Name: #{t.name}" 
     puts "Rating: #{t.rating}" 
-    puts "Quantity: #{t.quantity}" 
-    puts "Price: #{t.price}" 
+    puts "Quantity: #{t.small_quantity}" 
+    puts "Sale price: #{t.sale_price}"
+    puts "Original price: #{t.original_price}"
     puts "Price per cup: #{t.price_per_cup}"
     puts "Percent off: #{to.percent off}" 
     puts "More info: #{t.info}"

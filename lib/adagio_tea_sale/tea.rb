@@ -1,5 +1,5 @@
 class AdagioTeaSale::Tea 
-  attr_accessor :name, :price, :rating, :quantity, :price_per_cup, :percent_off, :info, :caffeine, :brewing, :url
+  attr_accessor :name, :sale_price, :original_price, :large_price, :rating, :small_quantity, :large_quantity :price_per_cup, :percent_off, :info, :caffeine, :brewing, :url
   @@all = []
   
   def initialize
@@ -53,6 +53,7 @@ end
 # original_price = doc.css("div.price strike").text.strip.delete("$").to_i   
 # need to remove $ and change to i 
 # sale_price = doc.css("div.price").first.text.strip.split("$").last.to_i 
+# large_price = doc.css("div.price").last.text.strip
 # rating = doc.css("div.scoreSummary").text.strip.to_i
 # small_quantity = doc.css(".rollover").first.text.strip
 # large_quantity = doc.css(".rollover").last.text.strip
