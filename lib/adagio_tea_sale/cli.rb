@@ -11,11 +11,6 @@ class AdagioTeaSale::CLI
     @current_user = AdagioTeaSale::User.new 
   end 
   
-  def current_user
-    @current_user
-  end 
-  
-  binding.pry 
   
   def call
     puts "Welcome to Adagio Tea."
@@ -115,7 +110,6 @@ class AdagioTeaSale::CLI
     #   print_tea(current_user.cart)
     # end 
     puts "Items in your cart..."
-    binding.pry # current_user is accesible here
     puts "To remove an item, enter 'remove item'."
     puts "To remove all items, enter 'remove all'."
     puts "To select a tea for more information, enter 'select'."
@@ -153,8 +147,6 @@ class AdagioTeaSale::CLI
   
     
 end 
-
-binding.pry 
 
 
 
