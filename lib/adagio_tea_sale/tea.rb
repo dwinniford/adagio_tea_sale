@@ -13,12 +13,16 @@ class AdagioTeaSale::Tea
       t = AdagioTeaSale::Tea.new 
       t.name= item.css("img").attribute("alt").value
       t.url= item.css("a").attribute("href").value
-      t.percent_off= item.css(".circleSale div").text
+      t.percent_off= item.css(".circleSale div").text.to_i
     end 
-    binding.pry 
+    self.add_attributes
   end 
   
-  def add_attributes
+  def self.add_attributes
+    basepath = "https://www.adagio.com"
+    url = basepath + @@all.first.url 
+    doc = Nokogiri::HTML(open(url))
+    binding.pry 
   end 
   
   def self.find_by_name
@@ -45,3 +49,10 @@ end
 # tea name = item_array.first.css("img").attribute("alt").value
 # relative_url = item_array.first.css("a").attribute("href").value
 # percent_off = item_array.first.css(".circleSale div").text
+
+# original_price = doc.css("div.price strike").text.strip.delete("$").to_i   
+# need to remove $ and change to i 
+# sale_price = doc.css("div.price").first.text.strip.split("$").last.to_i 
+# rating = doc.css("div.scoreSummary").text.strip.to_i
+# small_quantity = doc.css(".rollover").first.text.strip
+# large_quantity = doc.css(".rollover").last.text.strip
