@@ -1,5 +1,5 @@
 class AdagioTeaSale::Tea 
-  attr_accessor :name, :sale_price, :original_price, :large_price, :rating, :small_quantity, :large_quantity :price_per_cup, :percent_off, :info, :caffeine, :brewing, :url
+  attr_accessor :name, :sale_price, :original_price, :large_price, :rating, :small_quantity, :large_quantity, :price_per_cup, :percent_off, :info, :caffeine, :brewing, :url
   @@all = []
   
   def initialize
@@ -20,7 +20,8 @@ class AdagioTeaSale::Tea
   
   def self.add_attributes
     basepath = "https://www.adagio.com"
-    url = basepath + @@all.first.url 
+   # url = basepath + @@all.first.url 
+   url = "https://www.adagio.com/masters/fujian_ti_kuan_yin.html"
     doc = Nokogiri::HTML(open(url))
     binding.pry 
   end 
@@ -57,3 +58,7 @@ end
 # rating = doc.css("div.scoreSummary").text.strip.to_i
 # small_quantity = doc.css(".rollover").first.text.strip
 # large_quantity = doc.css(".rollover").last.text.strip
+# info = doc.css("div.description").text.strip
+# caffeine = doc.css("div.steepingInfo").text.split("|").first.strip
+# brewing = doc.css("div.steepingInfo").text.split("|").last.strip
+# add if statement for caffeine and brewing
