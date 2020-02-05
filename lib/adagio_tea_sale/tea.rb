@@ -8,6 +8,13 @@ class AdagioTeaSale::Tea
   
   def self.create_from_sale_page
     doc = Nokogiri::HTML(open("https://www.adagio.com/list/sale.html"))
+    item_array = doc.css(".productIndexParent")
+    item_array.each do |item|
+      t = AdagioTeaSale::Tea.new 
+      t.name= item.css("img").attribute("alt").value
+      t.url= item.css("a").attribute("href").value
+      t.percent_off= item.css(".circleSale div").text
+    end 
     binding.pry 
   end 
   
