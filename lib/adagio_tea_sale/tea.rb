@@ -35,11 +35,20 @@ class AdagioTeaSale::Tea
       else 
           t.original_price= doc.css("div.price strike").text.strip.delete("$").to_i
       end 
+      t.small_quantity= doc.css(".rollover").first.text.strip
       if doc.css("div.price").first
         t.sale_price = doc.css("div.price").first.text.strip.split("$").last.to_i
-      else t.sale_price = 0 
+        if t.small_quantity.scan("quart")
+          t.price_per_cup = (t.sale_price / (t.small_quantity.scan(/\d/).join.to_f * 4) ).round(2)
+        elsif t.small_quantity.scan("mug")
+          t.price_per_cup = 0 
+        else 
+          t.price_per_cup = (t.sale_price / t.small_quantity.scan(/\d/).join.to_f).round(2)
+        end 
+      else 
+        t.sale_price = 0 
+        t.price_per_cup = 0 
       end 
-      t.small_quantity= doc.css(".rollover").first.text.strip
       t.rating = doc.css("div.scoreSummary").text.strip.to_i
       t.info = doc.css("div.description").text.strip.delete("\n"+"\t"+"\r")
     end  
@@ -58,7 +67,7 @@ class AdagioTeaSale::Tea
   end 
   
   def self.sort_by_cup
-    @@all.sort { |t| t.price_per_cup }
+    @@all.sort { |a, b| a.price_per_cup <=> b.price_per_cup }
   end 
 
 end 

@@ -92,7 +92,7 @@ class AdagioTeaSale::CLI
       puts "Original price: $#{t.original_price}"
       puts "Quantity: #{t.small_quantity}"
       puts "Percent off: #{t.percent_off}%"
-      #puts "Price per cup: #{t.price_per_cup}"
+      puts "Price per cup: $#{t.price_per_cup}"
     end 
     puts "More info: #{t.info}"
     # puts "Caffeine: #{t.caffeine}"
