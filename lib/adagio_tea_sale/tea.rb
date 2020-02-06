@@ -3,7 +3,11 @@ class AdagioTeaSale::Tea
   @@all = []
   
   def initialize
-  @@all << self 
+    @@all << self 
+  end 
+  
+  def self.all 
+    @@all
   end 
   
   def self.create_from_sale_page
@@ -38,7 +42,6 @@ class AdagioTeaSale::Tea
       t.rating = doc.css("div.scoreSummary").text.strip.to_i
       t.info = doc.css("div.description").text.strip
     end  
-    binding.pry 
   end 
   
   def self.find_by_name

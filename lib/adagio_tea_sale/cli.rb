@@ -20,14 +20,17 @@ class AdagioTeaSale::CLI
   
   def list_sales
     puts "Here are today's sales:"
-    #print_tea(Tea.all)
-    puts "1. Black tea"
-    puts "2. Green tea"
+    print_tea(AdagioTeaSale::Tea.all)
+    
   end 
   
   def print_tea(tea_array)
     tea_array.each do |t|
-      puts "Name: #{t.name}, Price: #{t.sale_price}"
+      if t.sale_price == 0 
+        puts "Name: #{t.name}, Sold out"
+      else 
+        puts "Name: #{t.name}, Price: $#{t.sale_price}"
+      end 
     end 
   end 
   
