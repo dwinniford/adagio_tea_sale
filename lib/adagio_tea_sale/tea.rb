@@ -40,8 +40,8 @@ class AdagioTeaSale::Tea
         t.sale_price = doc.css("div.price").first.text.strip.split("$").last.to_i
         if t.small_quantity.scan("quart")
           t.price_per_cup = (t.sale_price / (t.small_quantity.scan(/\d/).join.to_f * 4) ).round(2)
-        elsif t.small_quantity.scan("mug")
-          t.price_per_cup = 0 
+        # elsif t.small_quantity.scan("mug")
+        #   t.price_per_cup = 0 
         else 
           t.price_per_cup = (t.sale_price / t.small_quantity.scan(/\d/).join.to_f).round(2)
         end 

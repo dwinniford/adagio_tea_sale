@@ -110,8 +110,8 @@ class AdagioTeaSale::CLI
   end 
   
   def sort_by_cup
-    #print_tea(Tea.sort_by_cup)
-    puts "Tea sorted by price per cup..."
+   puts "Items sorted by price per cup:"
+   print_tea(AdagioTeaSale::Tea.sort_by_cup)
   end 
   
   def view_cart
