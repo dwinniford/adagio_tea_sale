@@ -29,7 +29,7 @@ class AdagioTeaSale::CLI
       if t.original_price == 0 
         puts "Name: #{t.name}, Status: Sold out"
       else 
-        puts "Name: #{t.name}, Price: $#{t.sale_price}"
+        puts "Name: #{t.name}, #{t.percent_off}% off, Sale price: $#{t.sale_price}"
       end 
     end 
   end 
@@ -100,13 +100,13 @@ class AdagioTeaSale::CLI
   end 
   
   def sort_by_price
-    #print_tea(Tea.sort_by_price)
-    puts "Tea sorted by price..."
+    puts "Items sorted by price:"
+    print_tea(AdagioTeaSale::Tea.sort_by_price)
   end 
   
   def sort_by_percent
-   # print_tea(Tea.sort_by_percent)
-    puts "Tea sorted by percent..."
+    puts "Items sorted by percent off:"
+    print_tea(AdagioTeaSale::Tea.sort_by_percent)
   end 
   
   def sort_by_cup

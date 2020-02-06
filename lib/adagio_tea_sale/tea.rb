@@ -37,10 +37,11 @@ class AdagioTeaSale::Tea
       end 
       if doc.css("div.price").first
         t.sale_price = doc.css("div.price").first.text.strip.split("$").last.to_i
+      else t.sale_price = 0 
       end 
       t.small_quantity= doc.css(".rollover").first.text.strip
       t.rating = doc.css("div.scoreSummary").text.strip.to_i
-      t.info = doc.css("div.description").text.strip
+      t.info = doc.css("div.description").text.strip.delete("\n"+"\t"+"\r")
     end  
   end 
   
@@ -49,11 +50,11 @@ class AdagioTeaSale::Tea
   end 
   
   def self.sort_by_price
-    @@all.sort { |t| t.price }
+    @@all.sort { |a, b| a.sale_price <=> b.sale_price }
   end 
   
   def self.sort_by_percent
-    @@all.sort { |t| t.percent_off }
+    @@all.sort { |a, b| b.percent_off <=> a.percent_off }
   end 
   
   def self.sort_by_cup
