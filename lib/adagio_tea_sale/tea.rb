@@ -21,8 +21,19 @@ class AdagioTeaSale::Tea
   def self.add_attributes
     basepath = "https://www.adagio.com"
    # url = basepath + @@all.first.url 
-   url = "https://www.adagio.com/masters/fujian_ti_kuan_yin.html"
-    doc = Nokogiri::HTML(open(url))
+  # url = "https://www.adagio.com/masters/shizuoka_shincha.html"
+  # doc = Nokogiri::HTML(open(url))
+    @@all.each do |t|
+      url = basepath + t.url 
+      doc = Nokogiri::HTML(open(url))
+      t.original_price= doc.css("div.price strike").text.strip.delete("$").to_i
+      if doc.css("div.price").first
+        t.sale_price = doc.css("div.price").first.text.strip.split("$").last.to_i
+      end 
+      t.small_quantity= doc.css(".rollover").first.text.strip
+      t.rating = doc.css("div.scoreSummary").text.strip.to_i
+      t.info = doc.css("div.description").text.strip
+    end  
     binding.pry 
   end 
   
@@ -52,7 +63,6 @@ end
 # percent_off = item_array.first.css(".circleSale div").text
 
 # original_price = doc.css("div.price strike").text.strip.delete("$").to_i   
-# need to remove $ and change to i 
 # sale_price = doc.css("div.price").first.text.strip.split("$").last.to_i 
 # large_price = doc.css("div.price").last.text.strip
 # rating = doc.css("div.scoreSummary").text.strip.to_i
@@ -62,3 +72,16 @@ end
 # caffeine = doc.css("div.steepingInfo").text.split("|").first.strip
 # brewing = doc.css("div.steepingInfo").text.split("|").last.strip
 # add if statement for caffeine and brewing
+
+#why did ti kuan yin text info also include brewing and caffeine? include a gsub for \n \t \r and leave it info 
+# yunnan puer white original_price says 1249 because large_quantity also is strike through. add .first?
+# ^ same problem with ice teas 
+
+# @name="shizuoka shincha",
+#   @original_price=0,
+#   @percent_off=0,
+#   @rating=95,
+#   @small_quantity="returning end of Apr",
+#   @url="/masters/shizuoka_shincha.html">,
+
+
