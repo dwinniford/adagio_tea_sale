@@ -20,7 +20,7 @@ class AdagioTeaSale::User
   end 
   
   def total_price
-  #sum of cart price
+    @cart.sum { |t| t.sale_price }
   end 
   
 end 

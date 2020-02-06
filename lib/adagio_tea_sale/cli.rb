@@ -115,14 +115,13 @@ class AdagioTeaSale::CLI
   end 
   
   def view_cart
-    # create loop
-    # if current_user.cart.length == 0 
-    #   puts "Your cart is empty."
-    # else 
-    #   print_tea(current_user.cart)
-    # end 
-    puts "Items in your cart:"
-    print_tea(current_user.cart)
+    if current_user.cart.length == 0 
+      puts "Your cart is empty."
+    else 
+      puts "Items in your cart:"
+      print_tea(current_user.cart)
+      puts "Total price: $#{current_user.total_price}"
+    end 
     puts "To remove an item, enter 'remove item'."
     puts "To remove all items, enter 'remove all'."
     puts "To select a tea for more information, enter 'select'."
