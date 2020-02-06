@@ -21,12 +21,16 @@ class AdagioTeaSale::Tea
   def self.add_attributes
     basepath = "https://www.adagio.com"
    # url = basepath + @@all.first.url 
-  # url = "https://www.adagio.com/masters/shizuoka_shincha.html"
+  # url = "https://www.adagio.com/masters/yunnan_pu_erh_white.html"
   # doc = Nokogiri::HTML(open(url))
     @@all.each do |t|
       url = basepath + t.url 
       doc = Nokogiri::HTML(open(url))
-      t.original_price= doc.css("div.price strike").text.strip.delete("$").to_i
+      if  doc.css("div.price strike").text.strip.split("$").length > 2 
+        t.original_price= doc.css("div.price strike").text.strip.split("$")[1].to_i 
+      else 
+          t.original_price= doc.css("div.price strike").text.strip.delete("$").to_i
+      end 
       if doc.css("div.price").first
         t.sale_price = doc.css("div.price").first.text.strip.split("$").last.to_i
       end 
@@ -54,10 +58,9 @@ class AdagioTeaSale::Tea
 
 end 
 
-# doc.css(".productIndexParent")
+
 
 # item_array = doc.css(".productIndexParent")
-# item_array.first.css("img")
 # tea name = item_array.first.css("img").attribute("alt").value
 # relative_url = item_array.first.css("a").attribute("href").value
 # percent_off = item_array.first.css(".circleSale div").text
@@ -77,11 +80,21 @@ end
 # yunnan puer white original_price says 1249 because large_quantity also is strike through. add .first?
 # ^ same problem with ice teas 
 
+# t.original_price= doc.css("div.price strike").first.text.strip.delete("$").to_i
+# or 
+# t.original_price= doc.css("div.price strike").text.strip.split("$")[-2].to_i 
+# or 
+#  if  doc.css("div.price strike").text.strip.split("$").length > 2 
+#     t.original_price= doc.css("div.price strike").text.strip.split("$")[1].to_i 
+# else 
+
 # @name="shizuoka shincha",
 #   @original_price=0,
 #   @percent_off=0,
 #   @rating=95,
 #   @small_quantity="returning end of Apr",
 #   @url="/masters/shizuoka_shincha.html">,
+
+#sale_price needs if statement for sold out products
 
 
