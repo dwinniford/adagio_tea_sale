@@ -81,10 +81,15 @@ class AdagioTeaSale::CLI
     puts "Name: #{t.name}" 
     puts "Rating: #{t.rating}" 
     if t.original_price == 0 
-      puts "Status: Sold out, #{t.small_quantity}"
+      puts "Status: Sold out, #{t.small_quantity}" #small_quantity contains return date 
+    elsif t.small_quantity == "add tea mug"
+      puts "Sale price: $#{t.sale_price}"
+      puts "Original price: $#{t.original_price}"
+      puts "Quantity: 1"
+      puts "Percent off: #{t.percent_off}%"
     else 
       puts "Sale price: $#{t.sale_price}"
-      puts "Original price:$#{t.original_price}"
+      puts "Original price: $#{t.original_price}"
       puts "Quantity: #{t.small_quantity}"
       puts "Percent off: #{t.percent_off}%"
       #puts "Price per cup: #{t.price_per_cup}"
