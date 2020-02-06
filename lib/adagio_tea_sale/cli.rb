@@ -1,5 +1,5 @@
 #require_relative "../lib/tea.rb"
-require_relative "./user.rb"
+#require_relative "./user.rb"
 #require_relative "./scraper.rb"
 #require "nokogiri"
 
@@ -9,7 +9,6 @@ class AdagioTeaSale::CLI
   def initialize
     scrape_sale_page
     scrape_tea_page
-   # AdagioTeaSale::Tea.create_from_sale_page
     @current_user = AdagioTeaSale::User.new 
   end 
   
@@ -109,8 +108,6 @@ class AdagioTeaSale::CLI
       puts "Price per cup: $#{t.price_per_cup}"
     end 
     puts "More info: #{t.info}"
-    # puts "Caffeine: #{t.caffeine}"
-    # puts "Brewing instructions: #{t.brewing}"
   end 
   
   def sort_by_price
