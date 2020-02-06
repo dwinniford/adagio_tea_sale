@@ -26,8 +26,8 @@ class AdagioTeaSale::CLI
   
   def print_tea(tea_array)
     tea_array.each do |t|
-      if t.sale_price == 0 
-        puts "Name: #{t.name}, Sold out"
+      if t.original_price == 0 
+        puts "Name: #{t.name}, Status: Sold out"
       else 
         puts "Name: #{t.name}, Price: $#{t.sale_price}"
       end 
@@ -64,11 +64,9 @@ class AdagioTeaSale::CLI
   
   def select_tea
     puts "Please enter the name of a tea:"
-    # input = gets.strip
-    # t = Tea.find_by_name(input)
-    # print_tea_info(t)
-    # t = "jasmine tea"
-    # puts t 
+    input = gets.strip
+    t = AdagioTeaSale::Tea.find_by_name(input)
+    print_tea_info(t)
     puts "To add this tea to your shopping cart, enter 'add cart'."
     puts "To see main menu, enter 'menu'."
     input = gets.strip
@@ -82,14 +80,18 @@ class AdagioTeaSale::CLI
   def print_tea_info(t)
     puts "Name: #{t.name}" 
     puts "Rating: #{t.rating}" 
-    puts "Quantity: #{t.small_quantity}" 
-    puts "Sale price: #{t.sale_price}"
-    puts "Original price: #{t.original_price}"
-    puts "Price per cup: #{t.price_per_cup}"
-    puts "Percent off: #{to.percent off}" 
+    if t.original_price == 0 
+      puts "Status: Sold out, #{t.small_quantity}"
+    else 
+      puts "Sale price: $#{t.sale_price}"
+      puts "Original price:$#{t.original_price}"
+      puts "Quantity: #{t.small_quantity}"
+      puts "Percent off: #{t.percent_off}%"
+      #puts "Price per cup: #{t.price_per_cup}"
+    end 
     puts "More info: #{t.info}"
-    puts "Caffeine: #{t.caffeine}"
-    puts "Brewing instructions: #{t.brewing}"
+    # puts "Caffeine: #{t.caffeine}"
+    # puts "Brewing instructions: #{t.brewing}"
   end 
   
   def sort_by_price

@@ -44,7 +44,8 @@ class AdagioTeaSale::Tea
     end  
   end 
   
-  def self.find_by_name
+  def self.find_by_name(name)
+    self.all.detect { |t| t.name == name }
   end 
   
   def self.sort_by_price

@@ -4,7 +4,7 @@ class AdagioTeaSale::User
   attr_accessor :cart 
  
   def initialize 
-    @cart = ["black tea", "green tea", "puer tea"]
+    @cart = []
   end 
   
   def add_cart(t)
