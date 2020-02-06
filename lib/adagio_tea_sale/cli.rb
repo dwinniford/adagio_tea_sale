@@ -121,21 +121,21 @@ class AdagioTeaSale::CLI
       puts "Items in your cart:"
       print_tea(current_user.cart)
       puts "Total price: $#{current_user.total_price}"
-    end 
-    puts "To remove an item, enter 'remove item'."
-    puts "To remove all items, enter 'remove all'."
-    puts "To select a tea for more information, enter 'select'."
-    puts "To view the main menu, enter 'menu'."
-    input = gets.strip
-    case input 
-      when "remove item"
-        remove_item
-      when "remove all"
-        remove_all
-      when "select"
-        select_tea
-      when "menu"
-        menu 
+      puts "To remove an item, enter 'remove item'."
+      puts "To remove all items, enter 'remove all'."
+      puts "To select a tea for more information, enter 'select'."
+      puts "To view the main menu, enter 'menu'."
+      input = gets.strip
+      case input 
+        when "remove item"
+          remove_item
+        when "remove all"
+          remove_all
+        when "select"
+          select_tea
+        when "menu"
+          menu 
+       end 
     end 
   end 
   
