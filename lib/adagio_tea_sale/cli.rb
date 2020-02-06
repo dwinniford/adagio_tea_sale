@@ -121,8 +121,8 @@ class AdagioTeaSale::CLI
     # else 
     #   print_tea(current_user.cart)
     # end 
-    puts "Items in your cart..."
-    puts current_user.cart 
+    puts "Items in your cart:"
+    print_tea(current_user.cart)
     puts "To remove an item, enter 'remove item'."
     puts "To remove all items, enter 'remove all'."
     puts "To select a tea for more information, enter 'select'."
@@ -142,8 +142,7 @@ class AdagioTeaSale::CLI
   
   def add_cart(t)
      current_user.add_cart(t)
-    # puts "#{t.name} was added to your cart."
-     puts "A #{t} was added to your cart."
+     puts "#{t.name} was added to your cart."
   end 
   
   def remove_item

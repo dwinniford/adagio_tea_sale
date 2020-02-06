@@ -11,9 +11,8 @@ class AdagioTeaSale::User
     @cart << t 
   end 
   
-  def remove_item(name)
-    #@cart.delete { |t| t.name == name }
-    @cart.delete(name)
+  def remove_item(input)
+    @cart.delete_if { |t| t.name == input }
   end 
   
   def remove_all
