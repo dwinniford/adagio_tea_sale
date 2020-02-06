@@ -5,10 +5,24 @@ require_relative "./user.rb"
 
 class AdagioTeaSale::CLI 
   attr_accessor :current_user
-  
+  BASE_PATH = "https://www.adagio.com"
   def initialize
-    AdagioTeaSale::Tea.create_from_sale_page
+    scrape_sale_page
+    scrape_tea_page
+   # AdagioTeaSale::Tea.create_from_sale_page
     @current_user = AdagioTeaSale::User.new 
+  end 
+  
+  def scrape_sale_page
+    tea_array = AdagioTeaSale::Scraper.scrape_sale_page(BASE_PATH + "/list/sale.html")
+    AdagioTeaSale::Tea.create_from_tea_array(tea_array)
+  end 
+  
+  def scrape_tea_page
+    AdagioTeaSale::Tea.all.each do |t|
+      attributes = AdagioTeaSale::Scraper.scrape_tea_page(BASE_PATH + t.url)
+      t.add_attributes(attributes)
+    end
   end 
   
   

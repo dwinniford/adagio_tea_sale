@@ -10,47 +10,59 @@ class AdagioTeaSale::Tea
     @@all
   end 
   
-  def self.create_from_sale_page
-    doc = Nokogiri::HTML(open("https://www.adagio.com/list/sale.html"))
-    item_array = doc.css(".productIndexParent")
-    item_array.each do |item|
+  # def self.create_from_sale_page
+  #   doc = Nokogiri::HTML(open("https://www.adagio.com/list/sale.html"))
+  #   item_array = doc.css(".productIndexParent")
+  #   item_array.each do |item|
+  #     t = AdagioTeaSale::Tea.new 
+  #     t.name= item.css("img").attribute("alt").value
+  #     t.url= item.css("a").attribute("href").value
+  #     t.percent_off= item.css(".circleSale div").text.to_i
+  #   end 
+  #   self.add_attributes
+  # end 
+  
+  def self.create_from_tea_array(tea_array)
+      tea_array.each do |item_hash|
       t = AdagioTeaSale::Tea.new 
-      t.name= item.css("img").attribute("alt").value
-      t.url= item.css("a").attribute("href").value
-      t.percent_off= item.css(".circleSale div").text.to_i
+      t.name= item_hash[:name]
+      t.url= item_hash[:url]
+      t.percent_off= item_hash[:percent_off]
     end 
-    self.add_attributes
   end 
   
-  def self.add_attributes
-    basepath = "https://www.adagio.com"
-   # url = basepath + @@all.first.url 
-  # url = "https://www.adagio.com/masters/yunnan_pu_erh_white.html"
-  # doc = Nokogiri::HTML(open(url))
-    @@all.each do |t|
-      url = basepath + t.url 
-      doc = Nokogiri::HTML(open(url))
-      if  doc.css("div.price strike").text.strip.split("$").length > 2 
-        t.original_price= doc.css("div.price strike").text.strip.split("$")[1].to_i 
-      else 
-          t.original_price= doc.css("div.price strike").text.strip.delete("$").to_i
-      end 
-      t.small_quantity= doc.css(".rollover").first.text.strip
-      if doc.css("div.price").first
-        t.sale_price = doc.css("div.price").first.text.strip.split("$").last.to_i
-        if t.small_quantity.scan("quart")
-          t.price_per_cup = (t.sale_price / (t.small_quantity.scan(/\d/).join.to_f * 4) ).round(2)
-        else 
-          t.price_per_cup = (t.sale_price / t.small_quantity.scan(/\d/).join.to_f).round(2)
-        end 
-      else 
-        t.sale_price = 0 
-        t.price_per_cup = 0 
-      end 
-      t.rating = doc.css("div.scoreSummary").text.strip.to_i
-      t.info = doc.css("div.description").text.strip.delete("\n"+"\t"+"\r")
-    end  
+  def add_attributes(attribute_hash)
+    attribute_hash.each do |k,v| 
+      self.send("#{k.to_s}=", v)
+    end 
   end 
+  
+  # def self.add_attributes
+    
+  #   @@all.each do |t|
+  #     url = basepath + t.url 
+  #     doc = Nokogiri::HTML(open(url))
+  #     if  doc.css("div.price strike").text.strip.split("$").length > 2 
+  #       t.original_price= doc.css("div.price strike").text.strip.split("$")[1].to_i 
+  #     else 
+  #         t.original_price= doc.css("div.price strike").text.strip.delete("$").to_i
+  #     end 
+  #     t.small_quantity= doc.css(".rollover").first.text.strip
+  #     if doc.css("div.price").first
+  #       t.sale_price = doc.css("div.price").first.text.strip.split("$").last.to_i
+  #       if t.small_quantity.scan("quart")
+  #         t.price_per_cup = (t.sale_price / (t.small_quantity.scan(/\d/).join.to_f * 4) ).round(2)
+  #       else 
+  #         t.price_per_cup = (t.sale_price / t.small_quantity.scan(/\d/).join.to_f).round(2)
+  #       end 
+  #     else 
+  #       t.sale_price = 0 
+  #       t.price_per_cup = 0 
+  #     end 
+  #     t.rating = doc.css("div.scoreSummary").text.strip.to_i
+  #     t.info = doc.css("div.description").text.strip.delete("\n"+"\t"+"\r")
+  #   end  
+  # end 
   
   def self.find_by_name(name)
     self.all.detect { |t| t.name == name }
