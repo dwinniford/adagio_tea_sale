@@ -78,15 +78,20 @@ class AdagioTeaSale::CLI
   def select_tea
     puts "Please enter the name of a tea:"
     input = gets.strip
-    t = AdagioTeaSale::Tea.find_by_name(input)
-    print_tea_info(t)
-    puts "To add this tea to your shopping cart, enter 'add cart'."
-    puts "To see main menu, enter 'menu'."
-    input = gets.strip
-    if input == "add cart"
-      add_cart(t)
-    elsif input == "menu"
-      menu 
+    if !AdagioTeaSale::Tea.find_by_name(input)
+      puts "Invalid name."
+      select_tea
+    else 
+      t = AdagioTeaSale::Tea.find_by_name(input)
+      print_tea_info(t)
+      puts "To add this tea to your shopping cart, enter 'add cart'."
+      puts "To see main menu, enter 'menu'."
+      input = gets.strip
+      if input == "add cart"
+        add_cart(t)
+      elsif input == "menu"
+        menu 
+      end 
     end 
   end 
   
