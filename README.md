@@ -4,25 +4,17 @@ This Ruby gem provieds a CLI to scrape sale information from Adagio's website (h
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'adagio_tea_sale'
-```
+Clone the repository and cd into the folder.
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install adagio_tea_sale
-
 ## Usage
 
 Type the below and follow the on screen prompts.
 
- $ adagio_tea_sale  
+ $ ./bin/adagio_tea_sale  
 
 ## Development
 
