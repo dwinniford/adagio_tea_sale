@@ -21,8 +21,8 @@ Or install it yourself as:
 ## Usage
 
 Type the below and follow the on screen prompts.
-# is this the right command?
-# $ adagio_tea_sale  
+
+ $ adagio_tea_sale  
 
 ## Development
 
