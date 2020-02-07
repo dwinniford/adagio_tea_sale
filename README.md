@@ -1,8 +1,6 @@
 # AdagioTeaSale
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/adagio_tea_sale`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This Ruby gem provieds a CLI to scrape sale information from Adagio's website (https://www.adagio.com/list/sale.html).  It also scrapes more information about each tea from its individual page.  This information is made available for the user to read and sort by various attributes.  Users can also add and remove items to their shopping cart and see the total cost of items in their shopping cart.
 
 ## Installation
 
@@ -22,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Type the below and follow the on screen prompts.
+# is this the right command?
+# $ adagio_tea_sale  
 
 ## Development
 
