@@ -163,8 +163,12 @@ class AdagioTeaSale::CLI
   def remove_item
     puts "Please enter the name of a tea."
     input = gets.strip
-    current_user.remove_item(input)
-    puts "'#{input}' was succesfully removed from your cart."
+    if current_user.cart.detect { |t| t.name == input }
+      current_user.remove_item(input)
+      puts "'#{input}' was succesfully removed from your cart."
+    else 
+      puts "'#{input}' was not found in your cart."
+    end 
   end 
   
   def remove_all
